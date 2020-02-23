@@ -1,9 +1,13 @@
 package com.jojoldu.book.springboot.web.dto;
 
 import com.jojoldu.book.springboot.domain.posts.Posts;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 //PostsResponseDto는 Entity의 필드 중 일부만을 사용한다. 생성자로 Entity를 받아 필드에 값을 넣는다.
 
+@Getter
+@NoArgsConstructor
 public class PostsResponseDto {
 
   private Long id;
