@@ -24,7 +24,9 @@ public class PostsRepositoryTest {
 
   @Autowired
   PostsRepository postsRepository;
-  PostsUpdateRequestDto postsUpdateRequestDto;
+
+  @Autowired
+  private PostsService postsService;
 
   //JUnit에서 단위 테스트가 끝날 때마다 테스트 간 데이터 침범을 막기 위해 사용한다.
 //  @After
@@ -70,7 +72,11 @@ public class PostsRepositoryTest {
     List<Posts> postsList = postsRepository.findAll();
     //then
     Posts posts = postsList.get(0);
-    posts.update("new title", "new content");
+    postsService.update(posts.getId(), PostsUpdateRequestDto.builder()
+        .title("new title")
+        .content("new content")
+        .build()
+    );
 
     System.out.println(">>>>> getCreatedTime " + posts.getCreatedDate());
     System.out.println(">>>>> getModifiedDate " + posts.getModifiedDate());
