@@ -1,5 +1,6 @@
 package com.jojoldu.book.springboot.domain.posts;
 
+import com.jojoldu.book.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,12 +15,12 @@ import javax.persistence.*;
 //롬복은 필수 어노테이션은 아니므로 주요 어노테이션인 @Entity를 더욱 가까이 둔다. Kotlin 등 전환 시 롬복 제거에 유리하다.
 //Posts 클래스는 실제 DB 테이블과 매칭될 클래스이다. 이를 보여주기 위해 @Entity라는 표현을 사용했다.
 //JPA를 사용하면 실제 SQL 쿼리를 날리는 것이 아니라 이 클래스를 객체지향 방식으로 수정하면서 작업할 수 있다.
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   //Primary Key, 즉 데이터의 고유성을 표기할 키값의 생성 규칙을 나타낸다. auto_increment 방식이 도입되었다.
-  private Long id;
+  private Long Id;
 
   @Column(length = 500, nullable = false)
   //테이블의 칼럼을 나타내지만, 굳이 선언하지 않더라도 모든 필드가 칼럼화가 된다.
@@ -40,7 +41,6 @@ public class Posts {
     this.content = content;
     this.author = author;
   }
-
 
   public void update(String title, String content) {
     this.title = title;
