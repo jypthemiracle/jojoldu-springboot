@@ -1,14 +1,17 @@
 package com.jojoldu.book.springboot.domain.posts;
 
+import com.jojoldu.book.springboot.service.posts.PostsService;
+import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
+import java.time.LocalDateTime;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.springframework.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.Assert.assertTrue;
 
 //postsRepository의 save, findAll 기능을 테스트한다.
 @RunWith(SpringRunner.class)
@@ -21,12 +24,13 @@ public class PostsRepositoryTest {
 
   @Autowired
   PostsRepository postsRepository;
+  PostsUpdateRequestDto postsUpdateRequestDto;
 
   //JUnit에서 단위 테스트가 끝날 때마다 테스트 간 데이터 침범을 막기 위해 사용한다.
-  @After
-  public void cleanup() {
-    postsRepository.deleteAll();
-  }
+//  @After
+//  public void cleanup() {
+//    postsRepository.deleteAll();
+//  }
 
   @Test
   public void 게시물저장_불러오기() {
@@ -49,5 +53,29 @@ public class PostsRepositoryTest {
     Posts posts = postsList.get(0); //0번 인덱스의 가장 먼저 글을 하나 뽑아본다.
     assertThat(posts.getTitle()).isEqualTo(title);
     assertThat(posts.getContent()).isEqualTo(content);
+  }
+
+  @Test
+  public void BaseTimeEntity가_등록된다() {
+    //given
+    LocalDateTime now = LocalDateTime.of(2020, 02, 24, 10, 33, 25); //LocalDateTime.of를 하면 연월일시분초를 입력할 수 있다.
+    postsRepository.save(Posts.builder()
+      .title("title")
+      .content("content")
+      .author("hophfg@gmail.com")
+      .build()
+    );
+
+    //when
+    List<Posts> postsList = postsRepository.findAll();
+    //then
+    Posts posts = postsList.get(0);
+    posts.update("new title", "new content");
+
+    System.out.println(">>>>> getCreatedTime " + posts.getCreatedDate());
+    System.out.println(">>>>> getModifiedDate " + posts.getModifiedDate());
+
+    assertThat(posts.getCreatedDate()).isAfter(now); //The isAfter() method of LocalDate class in Java checks if this date is after the specified date.
+    assertThat(posts.getModifiedDate()).isAfter(now);
   }
 }
