@@ -28,14 +28,14 @@ public class PostsApiController {
   }
 
   //POST 또는 PUT 명령으로 게시물 수정하기 기능을 추가한다.
-  @PutMapping("/api/v1/posts/{Id}")
-  public Long update(@PathVariable Long Id, @RequestBody PostsUpdateRequestDto requestDto) {
-    return postsService.update(Id, requestDto);
+  @PutMapping("/api/v1/posts/{id}")
+  public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+    return postsService.update(id, requestDto);
   }
 
   //GET 명령으로 게시물 조회하기 기능을 추가한다.
-  @GetMapping("/api/v1/posts/{Id}")
-  public PostsResponseDto findById (@PathVariable Long Id) {
-    return postsService.findById(Id);
+  @GetMapping("/api/v1/posts/{id}")
+  public PostsResponseDto findById (@PathVariable Long id) {
+    return postsService.findById(id);
   }
 }

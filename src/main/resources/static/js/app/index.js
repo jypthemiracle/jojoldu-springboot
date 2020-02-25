@@ -2,7 +2,7 @@
 //브라우저의 스코프는 기본적으로 공용 공간으로 쓰이기 때문에 함수 이름이 같으면 계속 덮어쓰기가 된다.
 //따라서 index 객체 안에서만 scope가 돌도록 함수의 범위를 설정한 것으로 이해하면 된다.
 
-var main = {
+var index = {
   init: function () {
     var _this = this;
     $('#btn-save').on('click', function () {
@@ -43,11 +43,11 @@ var main = {
       title: $('#title').val(),
       content: $('#content').val()
     };
-    var Id = $('#Id').val();
+    var id = $('#id').val();
 
     $.ajax({
       type: 'PUT',
-      url: '/api/v1/posts/' + Id,
+      url: '/api/v1/posts/' + id,
       dataType: 'json',
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(data)
@@ -63,4 +63,4 @@ var main = {
   }
 };
 
-main.init();
+index.init();
