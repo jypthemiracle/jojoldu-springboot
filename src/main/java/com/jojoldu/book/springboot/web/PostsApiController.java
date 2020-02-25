@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,15 +27,15 @@ public class PostsApiController {
     return postsService.save(requestDto);
   }
 
-  //POST 명령으로 게시물 수정하기 기능을 추가한다.
-  @PostMapping("/api/v1/posts/{id}")
-  public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
-    return postsService.update(id, requestDto);
+  //POST 또는 PUT 명령으로 게시물 수정하기 기능을 추가한다.
+  @PutMapping("/api/v1/posts/{Id}")
+  public Long update(@PathVariable Long Id, @RequestBody PostsUpdateRequestDto requestDto) {
+    return postsService.update(Id, requestDto);
   }
 
   //GET 명령으로 게시물 조회하기 기능을 추가한다.
-  @GetMapping("/api/v1/posts/{id}")
-  public PostsResponseDto findById (@PathVariable Long id) {
-    return postsService.findById(id);
+  @GetMapping("/api/v1/posts/{Id}")
+  public PostsResponseDto findById (@PathVariable Long Id) {
+    return postsService.findById(Id);
   }
 }
