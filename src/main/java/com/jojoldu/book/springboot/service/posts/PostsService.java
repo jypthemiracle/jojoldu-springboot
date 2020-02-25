@@ -2,12 +2,15 @@ package com.jojoldu.book.springboot.service.posts;
 
 import com.jojoldu.book.springboot.domain.posts.Posts;
 import com.jojoldu.book.springboot.domain.posts.PostsRepository;
+import com.jojoldu.book.springboot.web.dto.PostsListResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service //이 클래스는 서비스라고 선언해줄 수 있다.
@@ -30,9 +33,17 @@ public class PostsService {
     return id;
   }
 
+  @Transactional(readOnly = true)
+  public List<PostsListResponseDto> findAllDesc() {
+    return postsRepository.findAllDesc().stream()
+        .map(posts -> new PostsListResponseDto(posts))
+        .collect(Collectors.toList());
+  }
+
+  @Transactional(readOnly = true)
   public PostsResponseDto findById(Long id) {
-    Posts entity = postsRepository.findById(id).orElseThrow(
-        () -> new IllegalArgumentException("no such user" + " id = " + id)
+    Posts entity = postsRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("no such user" + " id = " + id)
     );
     return new PostsResponseDto(entity);
   }
