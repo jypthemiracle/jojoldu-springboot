@@ -8,6 +8,8 @@ public class SessionUser implements Serializable {
   private String email;
   private String picture;
 
+  public SessionUser(){} //없으면 null 값으로 처리해서 fail to instantiate 에러를 뿜어낸다.
+
   public SessionUser(User user) {
     this.name = user.getName();
     this.email = user.getEmail();
