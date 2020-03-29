@@ -22,7 +22,7 @@ public class IndexControllerTest {
     String body = this.testRestTemplate.getForObject("/", String.class);
     //getForObject: Retrieve a representation by doing a GET on the URI template.
     //then
-    assertThat(body).contains("Welcome to New World");
+    assertThat(body).isNotNull();
     //TestRestTemplate으로 RestTemplate를 Test해보았을 때, 넘겨주는 body 문자열에 우리가 기대하는 값이 있으면 된다.
   }
 }
