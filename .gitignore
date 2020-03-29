@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+# 인텔리제이에서 자동으로 생성되는 파일은 모두 ignore 처리했습니다.
+# 보안을 위하여 application-oauth도 ignore 처리했습니다.
+.gradle/
+.idea/
+build/
+application-oauth.properties

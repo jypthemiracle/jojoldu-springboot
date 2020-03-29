@@ -1,0 +1,39 @@
+{{>layout/header}}
+<h1>Sigrid's QnA</h1>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-6">
+      <a href="/posts/save" role="button" class="btn btn-primary">글 등록하러 가기</a>
+      {{#userName}}
+        Logged in as: <span id="user">{{userName}}</span>
+        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+      {{/userName}}
+      {{^userName}}
+        <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+        <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+      {{/userName}}
+    </div>
+  </div>
+  <!-- 목록 출력 영역 -->
+  <table class="table table-dark table-bordered">
+    <thead class="thead-strong">
+    <tr>
+      <th>게시글 번호</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>최종 수정일</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#posts}}
+      <tr>
+        <td>{{Id}}</td>
+        <td><a href="/posts/update/{{Id}}">{{title}}</td>
+        <td>{{author}}</td>
+        <td>{{modifiedDate}}</td>
+      </tr>
+    {{/posts}}
+    </tbody>
+  </table>
+</div>
+{{>layout/footer}}
