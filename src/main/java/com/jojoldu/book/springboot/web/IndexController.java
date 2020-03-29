@@ -24,6 +24,7 @@ public class IndexController {
   public String postsSave() {
     return "posts-save";
   }
+
   @GetMapping("/posts/update/{Id}")
   public String postsUpdate(@PathVariable Long Id, Model model) {
     PostsResponseDto responseDto = postsService.findById(Id);

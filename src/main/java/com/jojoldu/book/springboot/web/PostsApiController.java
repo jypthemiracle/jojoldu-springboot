@@ -5,6 +5,7 @@ import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,14 +29,21 @@ public class PostsApiController {
   }
 
   //POST 또는 PUT 명령으로 게시물 수정하기 기능을 추가한다.
-  @PutMapping("/api/v1/posts/{Id}")
-  public Long update(@PathVariable Long Id, @RequestBody PostsUpdateRequestDto requestDto) {
-    return postsService.update(Id, requestDto);
+  @PutMapping("/api/v1/posts/{id}")
+  public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+    return postsService.update(id, requestDto);
   }
 
   //GET 명령으로 게시물 조회하기 기능을 추가한다.
-  @GetMapping("/api/v1/posts/{Id}")
-  public PostsResponseDto findById (@PathVariable Long Id) {
-    return postsService.findById(Id);
+  @GetMapping("/api/v1/posts/{id}")
+  public PostsResponseDto findById (@PathVariable Long id) {
+    return postsService.findById(id);
+  }
+
+  @DeleteMapping("/api/v1/posts/{id}")
+  public Long delete(@PathVariable Long id) {
+    //왜 이게 void면 안되는지 https://stackoverflow.com/questions/32637677/jquery-ajax-call-returning-an-error-with-readystate-4-status-200-statustext-ok
+    postsService.delete(id);
+    return id;
   }
 }

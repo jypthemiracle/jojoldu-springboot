@@ -2,13 +2,10 @@ package com.jojoldu.book.springboot.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;
-import lombok.Getter;
 import javax.persistence.MappedSuperclass;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-@Getter
 
 //JPA Entity 클래스들이 BaseTimeEntity를 상속할 경우, createdDate나 modifiedDate도 칼럼으로 인식하도록 한다.
 @MappedSuperclass
@@ -25,4 +22,12 @@ public abstract class BaseTimeEntity {
   @LastModifiedDate
   //조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
   private LocalDateTime modifiedDate;
+
+  public LocalDateTime getCreatedDate() {
+    return this.createdDate;
+  }
+
+  public LocalDateTime getModifiedDate() {
+    return this.modifiedDate;
+  }
 }
