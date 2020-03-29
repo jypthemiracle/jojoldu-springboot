@@ -40,6 +40,7 @@ dependencies { //특정 버전을 명시하지 않으면 ${springBootVersion}에
     compile ('org.springframework.boot:spring-boot-starter-data-jpa')
     compile ('org.springframework.boot:spring-boot-starter-mustache')
     compile ('org.springframework.boot:spring-boot-starter-oauth2-client')
+    testCompile('org.springframework.security:spring-security-test')
     //소셜 로그인 등 클라이언트 입장에서 소셜 기능을 구현할 때 필요한 의존성이다.
     //spring-security-oauth2-client와 spring-security-oauth2-jose를 기본으로 관리해준다.
     compile ('org.springframework.session:spring-session-jdbc')
